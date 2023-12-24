@@ -137,12 +137,60 @@
 // 2. დავწეროთ ფუნქცია რომელიც წამოიღებს მონაცემებს https://jsonplaceholder.typicode.com/users დან
 //    და დაბრუნებს ამ მონაცემებს
 
+async function getUsers() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+}
+
+getUsers()
+  .then((users) => {
+    console.log(users);
+  })
+  .catch((error) => console.error("Error:", error));
+
 // 3. დავწეროთ ფუნქცია რომელიც ეცდება წამოიღოს მონაცემები
 // https://jsonplaceholde.typicode.com (ლინკი სპეციალურად რასწორია) დან.
 // წარუმატებელი რექუესთის შემთხვევაში ხელახლა ცადოს წამოღება 5_ჯერ
 
+
+async function getDataWithRetry() {
+   let retryCount = 0;
+   const maxRetries = 5;
+
+   while (retryCount < maxRetries) {
+       try {
+           const response = await fetch("https://jsonplaceholde.typicode.com");
+           const data = await response.json();
+           return data;
+       } catch (error) {
+           console.error(`Error fetching data (attempt ${retryCount + 1}):`, error);
+           retryCount++;
+       }
+   }
+
+   console.error("Max retries reached. Unable to fetch data.");
+   return null;
+}
+getDataWithRetry()
+   .then(data => {
+       if (data) {
+           console.log(data);
+       }
+   });
+
+
+
+
 // 4. დავწეროთ ფუნქცია რომელიც ეცდება წმოიღოს მონაცემები https://dummyjson.com/users დან და https://jsonplaceholder.typicode.com/users დან.
 //    ფუნქციამ უნდა დაგვიბრუნოს ის ლისთი რომელის ცატვირთვაც უფრო მალე მოხდება.
+
+
 
 /* დავალება 
 https://api.escuelajs.co/api/v1/products/ _დან წამოვიღოთ პროდუქტები, გამოვიტანოთ ფეიჯზე ცხრილის სახით.
@@ -196,20 +244,17 @@ function applyFilter() {
 }
 fetchData();
 
-
 // 1. დავწეროთ ფუნქცია რომელიც მოგვცემს Object.entries() მსგავს შედეგს.
 // input {a:1, b:2}
 // output [['a', 1], ['b',2]]
 
 function customEntries(obj) {
-   return Object.keys(obj).map(key => [key, obj[key]]);
+  return Object.keys(obj).map((key) => [key, obj[key]]);
 }
 
 const inputObject1 = { a: 1, b: 2 };
 const result1 = customEntries(inputObject1);
 console.log(result1);
-
-
 
 // 2. დავწეროთ ფუნქცია რომელიც არგუმენტად მიიღებს ობიექტს.
 //    ფუნქციამ უნდა დააბრუნოს ყველა ფორფერთი სტრინგების მასივად
@@ -217,19 +262,17 @@ console.log(result1);
 // output ['a','b']
 // არ გამოვიყენოთ Object.keys() ფუნქცია.
 function getObjectKeys(obj) {
-   const keysArray = [];
-   for (const key in obj) {
-       if (obj.hasOwnProperty(key) && typeof obj[key] === 'string') {
-           keysArray.push(key);
-       }
-   }
-   return keysArray;
+  const keysArray = [];
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key) && typeof obj[key] === "string") {
+      keysArray.push(key);
+    }
+  }
+  return keysArray;
 }
-const inputObject2 = { a: 1, b: 2, c: 'hello', d: 'world' };
+const inputObject2 = { a: 1, b: 2, c: "hello", d: "world" };
 const result2 = getObjectKeys(inputObject2);
 console.log(result2);
-
-
 
 // 3. დავწეროთ ფუნქცია რომელიც არგუმენტად მიიღებს ობიექტს.
 //    ფუნქციამ უნდა დააბრუნოს ყველა ფროფერთის მნიშვნელობა მასივად
@@ -238,24 +281,22 @@ console.log(result2);
 // არ გამოვიყენოთ Object.values() ფუნქცია.
 
 function getObjectValues(obj) {
-   const valuesArray = [];
-   for (const key in obj) {
-       if (obj.hasOwnProperty(key)) {
-           valuesArray.push(obj[key]);
-       }
-   }
-   return valuesArray;
+  const valuesArray = [];
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      valuesArray.push(obj[key]);
+    }
+  }
+  return valuesArray;
 }
-const inputObject = { a: 1, b: 2, c: 'hello', d: 'world' };
+const inputObject = { a: 1, b: 2, c: "hello", d: "world" };
 const result = getObjectValues(inputObject);
 console.log(result);
-
-
 
 // დაწერეთ ფუნქცია რომელიც დალოგავს მაუსის კოორდინატებს მხოლოდ მაუსის გაჩერების შემდეგ.
 // ფუნქცია, რომელიც დალოგავს მაუსის კოორდინატებს მხოლოდ მაუსის გაჩერების შემდეგ
 function logMouseCoordinates(event) {
-   console.log(`Mouse coordinates - X: ${event.clientX}, Y: ${event.clientY}`);
+  console.log(`Mouse coordinates - X: ${event.clientX}, Y: ${event.clientY}`);
 }
 
-document.addEventListener('click', logMouseCoordinates);
+document.addEventListener("click", logMouseCoordinates);
