@@ -196,23 +196,59 @@ function applyFilter() {
 }
 fetchData();
 
-/*
-1. დავწეროთ ფუნქცია რომელიც მოგვცემს Object.entries() მსგავს შედეგს.
-input {a:1, b:2}
-output [['a', 1], ['b',2]]
 
-2. დავწეროთ ფუნქცია რომელიც არგუმენტად მიიღებს ობიექტს.
-   ფუნქციამ უნდა დააბრუნოს ყველა ფორფერთი სტრინგების მასივად
-input {a: 1, b:2}
-output ['a','b']
-არ გამოვიყენოთ Object.keys() ფუნქცია.
+// 1. დავწეროთ ფუნქცია რომელიც მოგვცემს Object.entries() მსგავს შედეგს.
+// input {a:1, b:2}
+// output [['a', 1], ['b',2]]
+// function customEntries(obj) {
+//    return Object.keys(obj).map(key => [key, obj[key]]);
+// }
 
-3. დავწეროთ ფუნქცია რომელიც არგუმენტად მიიღებს ობიექტს.
-   ფუნქციამ უნდა დააბრუნოს ყველა ფროფერთის მნიშვნელობა მასივად
-input {a: 1, b:2}
-output [1,2]
-არ გამოვიყენოთ Object.values() ფუნქცია.
+// const inputObject = { a: 1, b: 2 };
+// const result = customEntries(inputObject);
+// console.log(result);
 
-*/
+
+
+// 2. დავწეროთ ფუნქცია რომელიც არგუმენტად მიიღებს ობიექტს.
+//    ფუნქციამ უნდა დააბრუნოს ყველა ფორფერთი სტრინგების მასივად
+// input {a: 1, b:2}
+// output ['a','b']
+// არ გამოვიყენოთ Object.keys() ფუნქცია.
+// function getObjectKeys(obj) {
+//    const keysArray = [];
+//    for (const key in obj) {
+//        if (obj.hasOwnProperty(key) && typeof obj[key] === 'string') {
+//            keysArray.push(key);
+//        }
+//    }
+//    return keysArray;
+// }
+// const inputObject = { a: 1, b: 2, c: 'hello', d: 'world' };
+// const result = getObjectKeys(inputObject);
+// console.log(result);
+
+
+
+// 3. დავწეროთ ფუნქცია რომელიც არგუმენტად მიიღებს ობიექტს.
+//    ფუნქციამ უნდა დააბრუნოს ყველა ფროფერთის მნიშვნელობა მასივად
+// input {a: 1, b:2}
+// output [1,2]
+// არ გამოვიყენოთ Object.values() ფუნქცია.
+
+// function getObjectValues(obj) {
+//    const valuesArray = [];
+//    for (const key in obj) {
+//        if (obj.hasOwnProperty(key)) {
+//            valuesArray.push(obj[key]);
+//        }
+//    }
+//    return valuesArray;
+// }
+// const inputObject = { a: 1, b: 2, c: 'hello', d: 'world' };
+// const result = getObjectValues(inputObject);
+// console.log(result);
+
+
 
 // დაწერეთ ფუნქცია რომელიც დალოგავს მაუსის კოორდინატებს მხოლოდ მაუსის გაჩერების შემდეგ.
