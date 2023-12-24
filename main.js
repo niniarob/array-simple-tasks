@@ -159,36 +159,80 @@ getUsers()
 // წარუმატებელი რექუესთის შემთხვევაში ხელახლა ცადოს წამოღება 5_ჯერ
 
 
-async function getDataWithRetry() {
-   let retryCount = 0;
-   const maxRetries = 5;
+// async function getDataWithRetry() {
+//    let retryCount = 0;
+//    const maxRetries = 5;
 
-   while (retryCount < maxRetries) {
-       try {
-           const response = await fetch("https://jsonplaceholde.typicode.com");
-           const data = await response.json();
-           return data;
-       } catch (error) {
-           console.error(`Error fetching data (attempt ${retryCount + 1}):`, error);
-           retryCount++;
-       }
-   }
+//    while (retryCount < maxRetries) {
+//        try {
+//            const response = await fetch("https://jsonplaceholde.typicode.com");
+//            const data = await response.json();
+//            return data;
+//        } catch (error) {
+//            console.error(`Error fetching data (attempt ${retryCount + 1}):`, error);
+//            retryCount++;
+//        }
+//    }
 
-   console.error("Max retries reached. Unable to fetch data.");
-   return null;
-}
-getDataWithRetry()
-   .then(data => {
-       if (data) {
-           console.log(data);
-       }
-   });
+//    console.error("Max retries reached. Unable to fetch data.");
+//    return null;
+// }
+// getDataWithRetry()
+//    .then(data => {
+//        if (data) {
+//            console.log(data);
+//        }
+//    });
 
 
 
 
 // 4. დავწეროთ ფუნქცია რომელიც ეცდება წმოიღოს მონაცემები https://dummyjson.com/users დან და https://jsonplaceholder.typicode.com/users დან.
 //    ფუნქციამ უნდა დაგვიბრუნოს ის ლისთი რომელის ცატვირთვაც უფრო მალე მოხდება.
+
+
+
+async function fetchUsersFromMultipleSources() {
+   try {
+       const response1 = await fetch("https://dummyjson.com/users");
+       const data1 = await response1.json();
+
+       const response2 = await fetch("https://jsonplaceholder.typicode.com/users");
+       const data2 = await response2.json();
+
+       const mergedData = mergeData(data1, data2);
+
+       return mergedData;
+   } catch (error) {
+       console.error("Error fetching data:", error);
+       throw error;
+   }
+}
+function mergeData(data1, data2) {
+   const uniqueData = [];
+   const seenIds = new Set();
+
+   for (const item of data1) {
+       if (!seenIds.has(item.id)) {
+           uniqueData.push(item);
+           seenIds.add(item.id);
+       }
+   }
+
+   for (const item of data2) {
+       if (!seenIds.has(item.id)) {
+           uniqueData.push(item);
+           seenIds.add(item.id);
+       }
+   }
+
+   return uniqueData;
+}
+fetchUsersFromMultipleSources()
+   .then(mergedData => {
+       console.log(mergedData);ს
+   })
+   .catch(error => console.error("Error:", error));
 
 
 
