@@ -28,7 +28,7 @@
 //       gender: "male",
 //     },
 //   ];
-  
+
 //   // Get an array of all names
 //   const namesArr = characters.map(names => ({
 //   name:names.name}));
@@ -131,27 +131,18 @@
 //   const lessThan50 = characters.some(character => parseInt(character.mass) < 50);
 //   console.log(lessThan50);
 
-
-
-
-
 // 1. შევქმნათ ფრომისი. იმის შანსი რომ ფრომისი ან დარეზოლვდება ან დარეჯექთდება უნდა იყოს 50/50.
 //    ანუ ზოგიერთ გამოძახებაზე უნდა დარეჯექთდეს.
 
-// 2. დავწეროთ ფუნქცია რომელიც წამოიღებს მონაცემებს https://jsonplaceholder.typicode.com/users დან 
+// 2. დავწეროთ ფუნქცია რომელიც წამოიღებს მონაცემებს https://jsonplaceholder.typicode.com/users დან
 //    და დაბრუნებს ამ მონაცემებს
 
-// 3. დავწეროთ ფუნქცია რომელიც ეცდება წამოიღოს მონაცემები 
+// 3. დავწეროთ ფუნქცია რომელიც ეცდება წამოიღოს მონაცემები
 // https://jsonplaceholde.typicode.com (ლინკი სპეციალურად რასწორია) დან.
-// წარუმატებელი რექუესთის შემთხვევაში ხელახლა ცადოს წამოღება 5_ჯერ 
+// წარუმატებელი რექუესთის შემთხვევაში ხელახლა ცადოს წამოღება 5_ჯერ
 
 // 4. დავწეროთ ფუნქცია რომელიც ეცდება წმოიღოს მონაცემები https://dummyjson.com/users დან და https://jsonplaceholder.typicode.com/users დან.
 //    ფუნქციამ უნდა დაგვიბრუნოს ის ლისთი რომელის ცატვირთვაც უფრო მალე მოხდება.
-
-
-
-
-
 
 /* დავალება 
 https://api.escuelajs.co/api/v1/products/ _დან წამოვიღოთ პროდუქტები, გამოვიტანოთ ფეიჯზე ცხრილის სახით.
@@ -160,8 +151,50 @@ https://api.escuelajs.co/api/v1/products/ _დან წამოვიღოთ
 ცხრილში თითოეული სვეტის ჰედერზე კლიკით უნდა შევძლით წამოსული მონაცემების დალაგება ზრდადობით ან კლებადობით. ყველა სვეტზე თუ ვერ იზავთ 1_ზე მაინც აუცილებლად გააკეთეთ.
 */
 
+const apiUrl = "https://api.escuelajs.co/api/v1/products/";
+let productList = [];
+async function fetchData() {
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    productList = data;
+    displayData(productList);
+  } catch (error) {
+    console.error(error);
+  }
+}
+function displayData(data) {
+  const tableBody = document.getElementById("product-body");
+  tableBody.innerHTML = "";
 
+  data.forEach((product) => {
+    const row = tableBody.insertRow();
 
+    const idCell = row.insertCell(0);
+    idCell.textContent = product.id;
+
+    const titleCell = row.insertCell(1);
+    titleCell.textContent = product.title;
+
+    const priceCell = row.insertCell(2);
+    priceCell.textContent = product.price;
+
+    const categoryCell = row.insertCell(3);
+    categoryCell.textContent = product.category;
+
+    const createdAtCell = row.insertCell(4);
+    createdAtCell.textContent = product.creationAt;
+  });
+}
+function applyFilter() {
+  const filterInput = document.getElementById("filter");
+  const filterValue = filterInput.value.toLowerCase();
+  const filteredList = productList.filter((product) =>
+    product.title.toLowerCase().includes(filterValue)
+  );
+  displayData(filteredList);
+}
+fetchData();
 
 /*
 1. დავწეროთ ფუნქცია რომელიც მოგვცემს Object.entries() მსგავს შედეგს.
@@ -181,7 +214,5 @@ output [1,2]
 არ გამოვიყენოთ Object.values() ფუნქცია.
 
 */
-
-
 
 // დაწერეთ ფუნქცია რომელიც დალოგავს მაუსის კოორდინატებს მხოლოდ მაუსის გაჩერების შემდეგ.

@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product List</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <script src="./main.js"></script>
+    <div class="filter-container">
+        <label for="filter">Filter by Title:</label>
+        <input type="text" id="filter" name="filter" placeholder="Enter title...">
+        <button onclick="applyFilter()">Filter</button>
+    </div>
+    <table id="product-table">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">ID</th>
+                <th onclick="sortTable(1)">Title</th>
+                <th onclick="sortTable(2)">Price</th>
+                <th onclick="sortTable(3)">Category</th>
+                <th onclick="sortTable(4)">Creation At</th>
+            </tr>
+        </thead>
+        <tbody id="product-body"></tbody>
+    </table>
+    <script src="main.js"></script>
 </body>
 </html>
