@@ -200,13 +200,14 @@ fetchData();
 // 1. დავწეროთ ფუნქცია რომელიც მოგვცემს Object.entries() მსგავს შედეგს.
 // input {a:1, b:2}
 // output [['a', 1], ['b',2]]
-// function customEntries(obj) {
-//    return Object.keys(obj).map(key => [key, obj[key]]);
-// }
 
-// const inputObject = { a: 1, b: 2 };
-// const result = customEntries(inputObject);
-// console.log(result);
+function customEntries(obj) {
+   return Object.keys(obj).map(key => [key, obj[key]]);
+}
+
+const inputObject1 = { a: 1, b: 2 };
+const result1 = customEntries(inputObject1);
+console.log(result1);
 
 
 
@@ -215,18 +216,18 @@ fetchData();
 // input {a: 1, b:2}
 // output ['a','b']
 // არ გამოვიყენოთ Object.keys() ფუნქცია.
-// function getObjectKeys(obj) {
-//    const keysArray = [];
-//    for (const key in obj) {
-//        if (obj.hasOwnProperty(key) && typeof obj[key] === 'string') {
-//            keysArray.push(key);
-//        }
-//    }
-//    return keysArray;
-// }
-// const inputObject = { a: 1, b: 2, c: 'hello', d: 'world' };
-// const result = getObjectKeys(inputObject);
-// console.log(result);
+function getObjectKeys(obj) {
+   const keysArray = [];
+   for (const key in obj) {
+       if (obj.hasOwnProperty(key) && typeof obj[key] === 'string') {
+           keysArray.push(key);
+       }
+   }
+   return keysArray;
+}
+const inputObject2 = { a: 1, b: 2, c: 'hello', d: 'world' };
+const result2 = getObjectKeys(inputObject2);
+console.log(result2);
 
 
 
@@ -236,19 +237,25 @@ fetchData();
 // output [1,2]
 // არ გამოვიყენოთ Object.values() ფუნქცია.
 
-// function getObjectValues(obj) {
-//    const valuesArray = [];
-//    for (const key in obj) {
-//        if (obj.hasOwnProperty(key)) {
-//            valuesArray.push(obj[key]);
-//        }
-//    }
-//    return valuesArray;
-// }
-// const inputObject = { a: 1, b: 2, c: 'hello', d: 'world' };
-// const result = getObjectValues(inputObject);
-// console.log(result);
+function getObjectValues(obj) {
+   const valuesArray = [];
+   for (const key in obj) {
+       if (obj.hasOwnProperty(key)) {
+           valuesArray.push(obj[key]);
+       }
+   }
+   return valuesArray;
+}
+const inputObject = { a: 1, b: 2, c: 'hello', d: 'world' };
+const result = getObjectValues(inputObject);
+console.log(result);
 
 
 
 // დაწერეთ ფუნქცია რომელიც დალოგავს მაუსის კოორდინატებს მხოლოდ მაუსის გაჩერების შემდეგ.
+// ფუნქცია, რომელიც დალოგავს მაუსის კოორდინატებს მხოლოდ მაუსის გაჩერების შემდეგ
+function logMouseCoordinates(event) {
+   console.log(`Mouse coordinates - X: ${event.clientX}, Y: ${event.clientY}`);
+}
+
+document.addEventListener('click', logMouseCoordinates);
