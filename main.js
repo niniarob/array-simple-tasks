@@ -137,27 +137,26 @@
 // 2. დავწეროთ ფუნქცია რომელიც წამოიღებს მონაცემებს https://jsonplaceholder.typicode.com/users დან
 //    და დაბრუნებს ამ მონაცემებს
 
-async function getUsers() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
-  }
-}
+// async function getUsers() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/users");
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     throw error;
+//   }
+// }
 
-getUsers()
-  .then((users) => {
-    console.log(users);
-  })
-  .catch((error) => console.error("Error:", error));
+// getUsers()
+//   .then((users) => {
+//     console.log(users);
+//   })
+//   .catch((error) => console.error("Error:", error));
 
 // 3. დავწეროთ ფუნქცია რომელიც ეცდება წამოიღოს მონაცემები
 // https://jsonplaceholde.typicode.com (ლინკი სპეციალურად რასწორია) დან.
 // წარუმატებელი რექუესთის შემთხვევაში ხელახლა ცადოს წამოღება 5_ჯერ
-
 
 // async function getDataWithRetry() {
 //    let retryCount = 0;
@@ -184,57 +183,50 @@ getUsers()
 //        }
 //    });
 
-
-
-
 // 4. დავწეროთ ფუნქცია რომელიც ეცდება წმოიღოს მონაცემები https://dummyjson.com/users დან და https://jsonplaceholder.typicode.com/users დან.
 //    ფუნქციამ უნდა დაგვიბრუნოს ის ლისთი რომელის ცატვირთვაც უფრო მალე მოხდება.
 
+// async function fetchUsersFromMultipleSources() {
+//    try {
+//        const response1 = await fetch("https://dummyjson.com/users");
+//        const data1 = await response1.json();
 
+//        const response2 = await fetch("https://jsonplaceholder.typicode.com/users");
+//        const data2 = await response2.json();
 
-async function fetchUsersFromMultipleSources() {
-   try {
-       const response1 = await fetch("https://dummyjson.com/users");
-       const data1 = await response1.json();
+//        const mergedData = mergeData(data1, data2);
 
-       const response2 = await fetch("https://jsonplaceholder.typicode.com/users");
-       const data2 = await response2.json();
+//        return mergedData;
+//    } catch (error) {
+//        console.error("Error fetching data:", error);
+//        throw error;
+//    }
+// }
+// function mergeData(data1, data2) {
+//    const uniqueData = [];
+//    const seenIds = new Set();
 
-       const mergedData = mergeData(data1, data2);
+//    for (const item of data1) {
+//        if (!seenIds.has(item.id)) {
+//            uniqueData.push(item);
+//            seenIds.add(item.id);
+//        }
+//    }
 
-       return mergedData;
-   } catch (error) {
-       console.error("Error fetching data:", error);
-       throw error;
-   }
-}
-function mergeData(data1, data2) {
-   const uniqueData = [];
-   const seenIds = new Set();
+//    for (const item of data2) {
+//        if (!seenIds.has(item.id)) {
+//            uniqueData.push(item);
+//            seenIds.add(item.id);
+//        }
+//    }
 
-   for (const item of data1) {
-       if (!seenIds.has(item.id)) {
-           uniqueData.push(item);
-           seenIds.add(item.id);
-       }
-   }
-
-   for (const item of data2) {
-       if (!seenIds.has(item.id)) {
-           uniqueData.push(item);
-           seenIds.add(item.id);
-       }
-   }
-
-   return uniqueData;
-}
-fetchUsersFromMultipleSources()
-   .then(mergedData => {
-       console.log(mergedData);ს
-   })
-   .catch(error => console.error("Error:", error));
-
-
+//    return uniqueData;
+// }
+// fetchUsersFromMultipleSources()
+//    .then(mergedData => {
+//        console.log(mergedData);ს
+//    })
+//    .catch(error => console.error("Error:", error));
 
 /* დავალება 
 https://api.escuelajs.co/api/v1/products/ _დან წამოვიღოთ პროდუქტები, გამოვიტანოთ ფეიჯზე ცხრილის სახით.
@@ -243,80 +235,80 @@ https://api.escuelajs.co/api/v1/products/ _დან წამოვიღოთ
 ცხრილში თითოეული სვეტის ჰედერზე კლიკით უნდა შევძლით წამოსული მონაცემების დალაგება ზრდადობით ან კლებადობით. ყველა სვეტზე თუ ვერ იზავთ 1_ზე მაინც აუცილებლად გააკეთეთ.
 */
 
-const apiUrl = "https://api.escuelajs.co/api/v1/products/";
-let productList = [];
-async function fetchData() {
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    productList = data;
-    displayData(productList);
-  } catch (error) {
-    console.error(error);
-  }
-}
-function displayData(data) {
-  const tableBody = document.getElementById("product-body");
-  tableBody.innerHTML = "";
+// const apiUrl = "https://api.escuelajs.co/api/v1/products/";
+// let productList = [];
+// async function fetchData() {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const data = await response.json();
+//     productList = data;
+//     displayData(productList);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+// function displayData(data) {
+//   const tableBody = document.getElementById("product-body");
+//   tableBody.innerHTML = "";
 
-  data.forEach((product) => {
-    const row = tableBody.insertRow();
+//   data.forEach((product) => {
+//     const row = tableBody.insertRow();
 
-    const idCell = row.insertCell(0);
-    idCell.textContent = product.id;
+//     const idCell = row.insertCell(0);
+//     idCell.textContent = product.id;
 
-    const titleCell = row.insertCell(1);
-    titleCell.textContent = product.title;
+//     const titleCell = row.insertCell(1);
+//     titleCell.textContent = product.title;
 
-    const priceCell = row.insertCell(2);
-    priceCell.textContent = product.price;
+//     const priceCell = row.insertCell(2);
+//     priceCell.textContent = product.price;
 
-    const categoryCell = row.insertCell(3);
-    categoryCell.textContent = product.category;
+//     const categoryCell = row.insertCell(3);
+//     categoryCell.textContent = product.category;
 
-    const createdAtCell = row.insertCell(4);
-    createdAtCell.textContent = product.creationAt;
-  });
-}
-function applyFilter() {
-  const filterInput = document.getElementById("filter");
-  const filterValue = filterInput.value.toLowerCase();
-  const filteredList = productList.filter((product) =>
-    product.title.toLowerCase().includes(filterValue)
-  );
-  displayData(filteredList);
-}
-fetchData();
+//     const createdAtCell = row.insertCell(4);
+//     createdAtCell.textContent = product.creationAt;
+//   });
+// }
+// function applyFilter() {
+//   const filterInput = document.getElementById("filter");
+//   const filterValue = filterInput.value.toLowerCase();
+//   const filteredList = productList.filter((product) =>
+//     product.title.toLowerCase().includes(filterValue)
+//   );
+//   displayData(filteredList);
+// }
+// fetchData();
 
-// 1. დავწეროთ ფუნქცია რომელიც მოგვცემს Object.entries() მსგავს შედეგს.
-// input {a:1, b:2}
-// output [['a', 1], ['b',2]]
+// // 1. დავწეროთ ფუნქცია რომელიც მოგვცემს Object.entries() მსგავს შედეგს.
+// // input {a:1, b:2}
+// // output [['a', 1], ['b',2]]
 
-function customEntries(obj) {
-  return Object.keys(obj).map((key) => [key, obj[key]]);
-}
+// function customEntries(obj) {
+//   return Object.keys(obj).map((key) => [key, obj[key]]);
+// }
 
-const inputObject1 = { a: 1, b: 2 };
-const result1 = customEntries(inputObject1);
-console.log(result1);
+// const inputObject1 = { a: 1, b: 2 };
+// const result1 = customEntries(inputObject1);
+// console.log(result1);
 
 // 2. დავწეროთ ფუნქცია რომელიც არგუმენტად მიიღებს ობიექტს.
 //    ფუნქციამ უნდა დააბრუნოს ყველა ფორფერთი სტრინგების მასივად
 // input {a: 1, b:2}
 // output ['a','b']
 // არ გამოვიყენოთ Object.keys() ფუნქცია.
-function getObjectKeys(obj) {
-  const keysArray = [];
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key) && typeof obj[key] === "string") {
-      keysArray.push(key);
-    }
-  }
-  return keysArray;
-}
-const inputObject2 = { a: 1, b: 2, c: "hello", d: "world" };
-const result2 = getObjectKeys(inputObject2);
-console.log(result2);
+// function getObjectKeys(obj) {
+//   const keysArray = [];
+//   for (const key in obj) {
+//     if (obj.hasOwnProperty(key) && typeof obj[key] === "string") {
+//       keysArray.push(key);
+//     }
+//   }
+//   return keysArray;
+// }
+// const inputObject2 = { a: 1, b: 2, c: "hello", d: "world" };
+// const result2 = getObjectKeys(inputObject2);
+// console.log(result2);
 
 // 3. დავწეროთ ფუნქცია რომელიც არგუმენტად მიიღებს ობიექტს.
 //    ფუნქციამ უნდა დააბრუნოს ყველა ფროფერთის მნიშვნელობა მასივად
@@ -324,23 +316,98 @@ console.log(result2);
 // output [1,2]
 // არ გამოვიყენოთ Object.values() ფუნქცია.
 
-function getObjectValues(obj) {
-  const valuesArray = [];
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      valuesArray.push(obj[key]);
-    }
-  }
-  return valuesArray;
-}
-const inputObject = { a: 1, b: 2, c: "hello", d: "world" };
-const result = getObjectValues(inputObject);
-console.log(result);
+// function getObjectValues(obj) {
+//   const valuesArray = [];
+//   for (const key in obj) {
+//     if (obj.hasOwnProperty(key)) {
+//       valuesArray.push(obj[key]);
+//     }
+//   }
+//   return valuesArray;
+// }
+// const inputObject = { a: 1, b: 2, c: "hello", d: "world" };
+// const result = getObjectValues(inputObject);
+// console.log(result);
+
 
 // დაწერეთ ფუნქცია რომელიც დალოგავს მაუსის კოორდინატებს მხოლოდ მაუსის გაჩერების შემდეგ.
 // ფუნქცია, რომელიც დალოგავს მაუსის კოორდინატებს მხოლოდ მაუსის გაჩერების შემდეგ
-function logMouseCoordinates(event) {
-  console.log(`Mouse coordinates - X: ${event.clientX}, Y: ${event.clientY}`);
-}
+// function debouncer(delay, cb) {
+//   let timeOut;
 
-document.addEventListener("click", logMouseCoordinates);
+//   return function (...args) {
+//     clearTimeout(timeOut);
+//     timeOut = setTimeout(() => {
+//       cb.apply(this, args);
+//     }, delay);
+//   };
+// };
+
+// function showCoordinates(e) {
+//   console.log(e.pageX, e.pageY);
+// };
+
+// const debouncedMove = debouncer(1000, showCoordinates);
+// document.addEventListener('mousemove', debouncedMove);
+
+
+// class calculator {
+//   constructor(initialValue = 0){
+//     this.value = initialValue;
+//   }
+//   add(n){
+//     this.value += n;
+//     return this;
+//   }
+//   multiply(n){
+//     this.value *= n;
+//     return this;
+//   }
+//   getResult(){
+//     return this.value
+//   }
+// }
+// const calculator = new calculator();
+// const res = calculator.add(1).multiply(5).getResult();
+// console.log('res', res)
+
+/* 
+1. ლექციაზე დაწერილ კლასს Calculator_ს დავუმატოთ მეთოდები: 
+   divide - გაყოფა, 
+   pow - ახარისხება, 
+   substruct - გამოკლება, 
+   abs - მათემატიკური მოდული, 
+   sqrt - კვადრატული ფესვი, 
+   floor - დამრგვალება ქვემოთ უახლოეს მთელ რიცხვამდე.
+
+
+
+2. დავწეროთ კლასი Rectangle, რომელსაც ექნება width და height ფროფერთიები.
+   დავუმატოთ კლასს მეტოდები:
+   area - ფართობის გამოთვლა,
+   perimeter - პერიმეტრის გამოთვლა,
+   isSqure - შეამოწმებს არის თუ არა მოცმული მარტკუთხედი კვადრატი.
+
+   შევქნმათ რამდენიმე ობიექტი სხვადასვა მნიშვნელობებით და გამოვიძახოთ
+   მასში განსაზღვრული მეთოდები.
+
+3. დავწეროთ კლასი University, რომელსაც ექნება სახელი და დდეპრტამენტები.
+   დავუმატოთ მეთოდები:
+   addDepartment - დეპარტამენტის დამატება,
+   removeDepartment - დეპარტამენტის წაშლა.
+   showDepartments - დეპარტამენტების სია დაფორმატებული სტრინგში სურვილისამებრ.
+
+   გავუკეთოთ კლასს geeter ფოფერთი:
+   departmentCount - დეპარტამენტების რაოდენობს.
+
+   შევქმნათ რამდენიმე ობიექტი, ჩავატაროთ ზემოთ აღწერილი ოპერაციები.
+
+4. შევქმნათ კლასი Aminal რომელსაც ექნება species და sound ფროფერთიები.
+   დავამატოთ მეთოდი:
+   makeSound - რომელიც ბეჭდავს ცხოველის იმიტირებულ ხმას.
+   გავაკეთოთ შვილობილი კლასი Dog გავუკეთოთ თავისი makeSound მეთოდი რომელიც
+   გადაფარავს მშობლის sound მეთოდს და დაბეჭდავს ძაღლის ხმას (woof).
+
+   შევქმნათ Dog ლკასით რამდენიმე ობიექტი და გამოვიძახოთ მეთოდები.
+
+*/
